@@ -60,11 +60,11 @@ bool RobotHWSim::init_sim(
   // resize vectors to number of DOF
   n_dof_ = mujoco_model_->njnt - objects_in_scene;
   ROS_INFO("%i robot degrees of freedom found.", n_dof_);
-  ROS_DEBUG("%i generalized coordinates (qpos) found.", mujoco_model_->nq);
-  ROS_DEBUG("%i degrees of freedom (qvel) found.", mujoco_model_->nv);
+  ROS_INFO("%i generalized coordinates (qpos) found.", mujoco_model_->nq);
+  ROS_INFO("%i degrees of freedom (qvel) found.", mujoco_model_->nv);
   ROS_INFO("%i actuators/controls (ctrl) found.", mujoco_model_->nu);
-  ROS_DEBUG("%i actuation states (act) found.", mujoco_model_->na);
-  ROS_DEBUG("%i joints (njnt) found.", mujoco_model_->njnt);
+  ROS_INFO("%i actuation states (act) found.", mujoco_model_->na);
+  ROS_INFO("%i joints (njnt) found.", mujoco_model_->njnt);
   for (int mujoco_joint_id = 0; mujoco_joint_id < n_dof_; mujoco_joint_id++)
   {
     std::string joint_name = mj_id2name(mujoco_model_, mjOBJ_JOINT, mujoco_joint_id);

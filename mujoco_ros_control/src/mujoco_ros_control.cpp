@@ -42,7 +42,7 @@ MujocoRosControl::~MujocoRosControl()
 
   // deallocate existing mjData
   mj_deleteData(mujoco_data);
-  mj_deactivate();
+  // mj_deactivate();
 }
 
 bool MujocoRosControl::init(ros::NodeHandle &nodehandle)
@@ -64,7 +64,7 @@ bool MujocoRosControl::init(ros::NodeHandle &nodehandle)
     }
 
     // activation license mujoco
-    mj_activate(key_path_.c_str());
+    // mj_activate(key_path_.c_str());
 
     // publish clock for simulated time
     pub_clock_ = nodehandle.advertise<rosgraph_msgs::Clock>("/clock", 10);

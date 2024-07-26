@@ -444,12 +444,13 @@ void MujocoVisualizationUtils::mouse_button_cb_implementation(GLFWwindow* window
         // find geom and 3D click point, get corresponding body
         mjtNum selpnt[3];
         int geomid[1];
+        int flexid[1];
         int skinid[1];
         int selgeom = mjv_select(mujoco_model_, mujoco_data_, &opt,
                                  (mjtNum)width/(mjtNum)height,
                                  (mjtNum)lastx/(mjtNum)width,
                                  (mjtNum)(height-lasty)/(mjtNum)height,
-                                 &scn, selpnt, geomid, skinid);
+                                 &scn, selpnt, geomid, flexid, skinid);
         int selbody = (selgeom >=0 ? mujoco_model_->geom_bodyid[selgeom] : 0);
 
         // set lookat point, start tracking is requested
@@ -611,7 +612,7 @@ void MujocoVisualizationUtils::profiler_update(void)
     int i, n;
 
     // update constraint figure
-    figconstraint.linepnt[0] = mjMIN(mjMIN(mujoco_data_->solver_iter, mjNSOLVER), mjMAXLINEPNT);
+    figconstraint.linepnt[0] = mjMIN(mjMIN(mujoco_data_->solver_niter[0], mjNSOLVER), mjMAXLINEPNT); // todo: which island?
     for (i = 1; i < 5; i++)
         figconstraint.linepnt[i] = figconstraint.linepnt[0];
     if (mujoco_model_->opt.solver == mjSOL_PGS)
@@ -639,7 +640,7 @@ void MujocoVisualizationUtils::profiler_update(void)
     }
 
     // update cost figure
-    figcost.linepnt[0] = mjMIN(mjMIN(mujoco_data_->solver_iter, mjNSOLVER), mjMAXLINEPNT);
+    figcost.linepnt[0] = mjMIN(mjMIN(mujoco_data_->solver_niter[0], mjNSOLVER), mjMAXLINEPNT); // todo: which island
     for (i = 1; i < 3; i++)
         figcost.linepnt[i] = figcost.linepnt[0];
     if (mujoco_model_->opt.solver == mjSOL_PGS)
@@ -700,9 +701,9 @@ void MujocoVisualizationUtils::profiler_update(void)
         static_cast<float>(mujoco_model_->nv),
         static_cast<float>(mujoco_model_->nbody),
         static_cast<float>(mujoco_data_->nefc),
-        static_cast<float>(mju_sqrt((mjtNum)mujoco_data_->solver_nnz)),
+        static_cast<float>(mju_sqrt((mjtNum)mujoco_data_->solver_nnz[0])),  // todo: which island?
         static_cast<float>(mujoco_data_->ncon),
-        static_cast<float>(mujoco_data_->solver_iter)
+        static_cast<float>(mujoco_data_->solver_niter[0]) // todo: which island
     };
 
     // update figsize

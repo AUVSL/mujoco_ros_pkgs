@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(mujoco_ros_control)
 
-set(MUJOCO_ROOT_DIR "$ENV{HOME}/.mujoco/mujoco-2.3.5")
+set(MUJOCO_ROOT_DIR "/opt/mujoco-3.2.0")
 set(MUJOCO_INCLUDE_DIR "${MUJOCO_ROOT_DIR}/include")
 set(MUJOCO_LIB_DIR "${MUJOCO_ROOT_DIR}/lib")
 set(MUJOCO_SIM_DIR "${MUJOCO_ROOT_DIR}/simulate")
