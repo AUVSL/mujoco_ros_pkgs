@@ -3,8 +3,7 @@
 Wrapper, tools for using ROS with the MuJoCo simulator.
 
 # installation
-Download mujoco release from https://github.com/deepmind/mujoco/releases  
-Move the downloaded directory under  ~/.mujoco  
+Download mujoco release from https://github.com/deepmind/mujoco/releases into /opt/mujoco-{version}
 Fix the version of mujoco in mujoco_ros_control/CMakeLists.txt
 
 ```bash
